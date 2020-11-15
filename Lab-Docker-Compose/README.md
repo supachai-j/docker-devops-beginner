@@ -157,4 +157,4 @@ services:
     - 8085:80
 ```
 YAML and JSON PATH Training
-https://kodekloud.com/courses/635226/lectures/11338837
+https://kodekloud.com/p/json-path-quiz
