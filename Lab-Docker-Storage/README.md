@@ -41,3 +41,20 @@ docker rm -f app_mysql
 rm -f /data/mysql
 
 ```
+
+### Storage drivers
+- AUFS
+- ZFS
+- BTRFS
+- Device Mapper
+- Overlay
+- Overlay2
+
+### Demo Storage docker 
+```
+ls -l /var/lib/docker
+docker pull jaturaprom/my-simple-webapp
+docker image history jaturaprom/my-simple-webapp
+docker system df
+docker system df -v
+```
