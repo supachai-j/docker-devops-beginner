@@ -47,20 +47,20 @@ mysql       |       172.17.0.3
 
 ### Example Docker Network
 ```
-    ~/Dr/[ D/Docker f/docker-devops-beginner    main +2 !1 ?1 ❯ docker network ls                                                                                                       09:57:00
+$ docker network ls
 NETWORK ID          NAME                DRIVER              SCOPE
 4c90f5afb338        bridge              bridge              local
 bcf86d8fbb40        host                host                local
 da6b348da636        none                null                local
-    ~/Dr/[ D/Docker f/docker-devops-beginner    main +2 !1 ?1 ❯ docker network create --driver bridge --subnet  182.18.0.0/16 backend-network                                           09:57:06
+$ docker network create --driver bridge --subnet  182.18.0.0/16 backend-network
 2f564ff850e9bab0530752f13448db63480ae07982e63e9983a441ae76fb4d43
-    ~/Dr/[ D/Docker f/docker-devops-beginner    main +2 !1 ?1 ❯ docker network ls                                                                                                       09:57:22
+$docker network ls
 NETWORK ID          NAME                DRIVER              SCOPE
 2f564ff850e9        backend-network     bridge              local
 4c90f5afb338        bridge              bridge              local
 bcf86d8fbb40        host                host                local
 da6b348da636        none                null                local
-    ~/Dr/[ D/Docker f/docker-devops-beginner    main +2 !1 ?1 ❯ docker inspect backend-network                                                                                          09:57:32
+$docker inspect backend-network 
 [
     {
         "Name": "backend-network",
@@ -90,8 +90,8 @@ da6b348da636        none                null                local
         "Labels": {}
     }
 ]
-    ~/Dr/[ D/Docker f/docker-devops-beginner    main +2 !1 ?1 ❯ 
-    ~/Dr/[ D/Docker f/docker-devops-beginner    main +2 !1 ?1 ❯ docker run -d -p 8080:80 --network=backend-network nginx                                                                09:57:53
+
+$docker run -d -p 8080:80 --network=backend-network nginx
 Unable to find image 'nginx:latest' locally
 latest: Pulling from library/nginx
 852e50cd189d: Pull complete 
@@ -102,17 +102,15 @@ c5df295936d3: Pull complete
 Digest: sha256:c3a1592d2b6d275bef4087573355827b200b00ffc2d9849890a4f3aa2128c4ae
 Status: Downloaded newer image for nginx:latest
 50181267f44d5a423a0cc7096a02ea6899a45a71aaf4d586a57ebb2c06dd0b9d
-    ~/Dr/[ D/Docker f/docker-devops-beginner    main +4 ❯ docker p                                                                                                               10s   10:04:29
-docker: 'p' is not a docker command.
-See 'docker --help'
-    ~/Dr/[ D/Docker f/docker-devops-beginner    main +4 ❯ docker ps                                                                                                                     10:04:31
+
+$docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
 50181267f44d        nginx               "/docker-entrypoint.…"   2 seconds ago       Up 3 seconds        0.0.0.0:8080->80/tcp   sharp_ishizaka
-    ~/Dr/[ D/Docker f/docker-devops-beginner    main +4 ❯ docker-machine ls                                                                                                             10:04:33
+$docker-machine ls
 NAME       ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER      ERRORS
 docker01   *        virtualbox   Running   tcp://192.168.99.104:2376           v19.03.12   
 docker02   -        virtualbox   Stopped                                       Unknown     
-    ~/Dr/[ D/Docker f/docker-devops-beginner    main +4 ❯ docker inspect sharp_ishizaka 
+$docker inspect sharp_ishizaka 
 .......
         "IPv6Gateway": "",
             "MacAddress": "",
@@ -137,12 +135,11 @@ docker02   -        virtualbox   Stopped                                       U
             }
         }
     }
-]
-    ~/Dr/[ D/Docker f/docker-devops-beginner    main +4 ❯    
+]   
 ```
-
+##### Demo
 ```
-docker network create --driver bridge --subnet=182.18.0.1/24 --gateway=182.18.0.1 wp-mysql-network
-docker run -d -e MYSQL_ROOT_PASSWORD=db_pass123 --name mysql-db --network wp-mysql-network mysql:5.6
-docker run --network=wp-mysql-network -e DB_Host=mysql-db -e DB_Password=db_pass123 -p 38080:8080 --name webapp --link mysql-db:mysql-db -d kodekloud/simple-webapp-mysql
+$docker network create --driver bridge --subnet=182.18.0.1/24 --gateway=182.18.0.1 wp-mysql-network
+$docker run -d -e MYSQL_ROOT_PASSWORD=db_pass123 --name mysql-db --network wp-mysql-network mysql:5.6
+$docker run --network=wp-mysql-network -e DB_Host=mysql-db -e DB_Password=db_pass123 -p 38080:8080 --name webapp --link mysql-db:mysql-db -d kodekloud/simple-webapp-mysql
 ```
