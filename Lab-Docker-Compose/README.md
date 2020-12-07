@@ -132,10 +132,10 @@ docker run -d -p 5001:80 --link db:db result-app
 ```
 
 ## 6. Deploy example voting app with Docker Compose version 1
+```
 vi docker-compose.yml
-``
 docker-compose up
-``
+```
 ## Lab Testing 
 ```
 docker run -d -e POSTGRES_PASSWORD=mysecretpassword --name=db postgres
@@ -147,7 +147,7 @@ version: '3.0'
 services:
   db:
     environment:
-      POSTGRES_PASSWORD: mysecretpassword
+      - POSTGRES_PASSWORD: mysecretpassword
     image: postgres
   wordpress:
     image: wordpress
